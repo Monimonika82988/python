@@ -1,0 +1,12 @@
+class Solution(object):
+    def predictTheWinner(self, nums):
+        memo =[[-1 for j in range(len(nums))] for i in range(len(nums))]
+        def play(i, j):
+            if i<j:
+                if memo[i][j]!=-1:
+                   return memo[i][j]
+                memo[i][j]= max(nums[i]-play(i+1, j), nums[j]-play(i, j-1))
+                return memo[i][j]
+            else:
+                return nums[i]
+        return play(0, len(nums)-1)>=0
